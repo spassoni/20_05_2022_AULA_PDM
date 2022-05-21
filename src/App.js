@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { Reducer } from 'redux';
 //()=>
 //nome - criarContrato
 //recebe: nome e valor
@@ -39,6 +40,34 @@ const SolicitarCashBack = (valor, nome) =>{
     } 
   }
 } 
+//arrow function
+//historicoDePedidosCashbackReducer
+//recebe uma falta de estado sobre a qual operar(uma lista chamada
+//historicoDePedidosCashback. Por padrao, ela é uma lista vazia)
+//recebe uma ação
+//detalhe: somente operar no estado se o type for apropiado
+//detalhe 2: obrigatorio usar o spread(..)
+const historicoDePedidosCashbackReducer = (historicoDePedidosCashback=[], acao) =>{
+  if(acao.type === "CASHBASH"){
+    return
+      [...historicoDePedidosCashbackReducer, acao.payload]
+  }
+  return historicoDePedidosCashbackReducer
+}
+//implementar o reducer que manuipula o caixa
+//o caixa começa zerado
+const caixaReducer = (valorEmCaixa=0, acao) =>{
+  if(acao.type === "SOLICITAR CASHBACK") return valorEmCaixa- acao.payload.valor
+  if(acao.type === "CRIAR_CONTRATO") return valorEmCaixa + acao.payload.valor
+  return valorEmCaixa
+}
+//implemetar o reducer que lida  com a lista de contratos
+//ele pode criar contrato e cancelar contratos
+
+contratoReducer = (contratos) =>{
+  if(acao.type === "CANCELAR_CONTRATO") return cancelarContrato(contratos)
+  if(acao.type === "CRIAR_CONTRATO") return criarContrato(contratos)
+}
   return (
     <div className="App">
 
